@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+message Test {
+  string field1 = 1;
+  int32 field2 = 2;
+}
+
+service Dummy {
+  rpc Trpc(Test) returns(Test) {}
+}

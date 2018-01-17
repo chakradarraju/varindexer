@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package common;
+
+message Variable {
+  // full name of variable, from input.
+  string name = 1;
+
+  // score of variable by which it has to be sorted, from input.
+  int32 score = 2;
+}
+
+message WordMetadata {
+  // Word for which we have collected the metadata.
+  string word = 1;
+
+  // Indices of variables that contains this word.
+  // The indices are in increasing order, and the variables are sorted in
+  // decreasing order of their score.
+  // Has not more than 10 indices, as we need to return only 10 results.
+  // Number of results is configurable by max_result_size flag.
+  repeated int32 variable_index = 2;
+}
+
+message Index {
+  // Variables in order decreasing score.
+  repeated Variable variable = 1;
+
+  // Metadata for each unique word in variable name in variable field.
+  repeated WordMetadata word = 2;
+
+  // Max result size assumed at indexing, ie number of results kept per indexed word.
+  int32 max_result_size = 3;
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package serving;
+
+service VariableIndex {
+  rpc Search(SearchRequest) returns (SearchResult) {}
+}
+
+message SearchRequest {
+  // Query to search variables for.
+  string query = 1;
+
+  // Max number of results to return. Should not be more than 10.
+  int32 max_results = 2;
+}
+
+message SearchResult {
+  // All variables matched query in index.
+  repeated string variable = 1;
+}

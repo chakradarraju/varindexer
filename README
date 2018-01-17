@@ -1,0 +1,14 @@
+# Usage
+## To generate random variable names text file:
+bazel build exp:gen_vars -c opt && time bazel-bin/exp/gen_vars --words_path=$BASE/data/words --vars_path=$BASE/data/vars
+## To build index:
+bazel build indexing:build_index -c opt && time bazel-bin/indexing/build_index --text_input=$BASE/data/vars --index_path=$BASE/data/index
+## To measure parsing time:
+bazel build exp:parse_proto -c opt && time bazel-bin/exp/parse_proto --index_path=$BASE/data/index
+## To run RPC server:
+bazel build serving:rpc_server -c opt && bazel-bin/serving/rpc_server --index_path=$BASE/data/index
+## To run load test:
+bazel build serving:load_test -c opt && time bazel-bin/serving/load_test --words_path=$BASE/data/words --nooutput
+## To run queries manually:
+bazel build serving:user_client -c opt && bazel-bin/serving/user_client
+
